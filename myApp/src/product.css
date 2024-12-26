@@ -1,0 +1,108 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+.product{
+    padding:30px;
+}
+.product-item{
+    padding:10px;
+}
+
+/* CSS for the container */
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.image-container {
+    flex-shrink: 0;
+    width: 60%;  /* You can adjust this */
+    position: relative;  /* Set relative positioning for the overlay */
+    cursor: pointer; /* Change cursor to indicate the image is clickable */
+}
+
+.text-container {
+    width: 40%;  /* Ensure text takes the remaining space */
+}
+
+/* Overlay effect */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Darken the image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;  /* Initially hidden */
+    transition: opacity 0.3s ease-in-out;  /* Smooth transition */
+}
+
+.preview-text {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Show overlay when hovering over the image */
+.image-container:hover .overlay {
+    opacity: 1;  /* Show the overlay */
+}
+
+/* Optional: add some margin for separation */
+.ms-4 {
+    margin-left: 1.5rem;
+}
+
+.image-container img {
+    max-width: 100%; /* Ensure image fits in container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    display: inline-block;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.modal-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: black;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Optional: adding some style to the button */
+.close-btn:hover {
+    color: red;
+}
+
