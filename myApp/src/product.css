@@ -106,3 +106,88 @@
     color: red;
 }
 
+/* Đặt chiều cao cố định cho card */
+.product-item .card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .product-item .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Cố định chiều cao của hình ảnh */
+  .product-item .card-img-top {
+    width: 100%;
+    height: 150px;
+    object-fit: cover; /* Giữ tỷ lệ hình ảnh và cắt phần dư */
+  }
+  
+  /* Đặt chiều cao cố định cho body của card */
+  .product-item .card-body {
+    flex-grow: 1; /* Để phần nội dung chiếm đều không gian còn lại */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  /* Tiêu đề của card */
+  .product-item .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  /* Nội dung ngắn gọn */
+  .product-item .card-text {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+    white-space: nowrap; /* Giới hạn nội dung trong một dòng */
+    overflow: hidden;    /* Ẩn phần nội dung tràn ra ngoài */
+    text-overflow: ellipsis;
+  }
+  
+  /* Căn chỉnh grid */
+  .product .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Khoảng cách giữa các bài post */
+  }
+  
+  .product-item {
+    flex: 0 0 calc(25% - 20px); /* 4 bài trên mỗi hàng */
+    max-width: calc(25% - 20px);
+    box-sizing: border-box;
+  }
+  
+  @media (max-width: 992px) {
+    .product-item {
+      flex: 0 0 calc(33.33% - 20px); /* 3 bài trên mỗi hàng */
+      max-width: calc(33.33% - 20px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .product-item {
+      flex: 0 0 calc(50% - 20px); /* 2 bài trên mỗi hàng */
+      max-width: calc(50% - 20px);
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .product-item {
+      flex: 0 0 100%; /* 1 bài trên mỗi hàng */
+      max-width: 100%;
+    }
+  }
+  

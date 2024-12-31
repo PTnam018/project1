@@ -1,51 +1,81 @@
-import React, { useState } from 'react';
-import img1 from './image/img1.jpeg';
-import './product.css';
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getPostByPostId } from "./services/API.js";
+import "./detail.css";
 
 export default function Detail() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { postId } = location.state;
+  const [post, setPost] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+  useEffect(() => {
+    const fetchPostDetail = async () => {
+      try {
+        setIsLoading(true);
+        const response = await getPostByPostId(postId);
+        setPost(response.data.data);
+      } catch (error) {
+        console.error("Error fetching post details:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    return ( 
-        <div className="container mt-5">
-            <h2 className="text-center text-success mb-4">Chi tiết tác phẩm</h2>
+    fetchPostDetail();
+  }, [postId]);
 
-            <div className="row justify-content-center">
-                <div className="col-lg-8 bg-white shadow-sm p-4 rounded">
-                    <div className="d-flex">
-                        <div className="image-container position-relative" onClick={openModal}>
-                            <img src={img1} className="img-fluid rounded" alt="Pháo 105mm" />
-                            <div className="overlay">
-                                <span className="preview-text">Preview</span>
-                            </div>
-                        </div>
-
-                        <div className="text-container ms-4">
-                            <h3 className="text-success mb-3">Pháo 105mm của Đại đội 806</h3>
-                            <p>
-                                Pháo 105mm của Đại đội 806 Pháo mặt đất 105mm, số hiệu 14683 do Mỹ sản xuất viện trợ cho Pháp.
-                                Bộ đội Việt Nam thu được trong trận đánh đồn Nghĩa Lộ, chiến dịch Tây Bắc năm 1952. Đây là một trong
-                                những khẩu pháo bắn loạt đầu tiên, đội bão lửa lên đầu giặc Pháp trong trận đánh cứ điểm Him Lam ngày
-                                13/3/1954, mở màn Chiến dịch Điện Biên Phủ.
-                            </p>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-
-            {/* Modal for large image */}
-            {isModalOpen && (
-                <div className="modal-overlay" onClick={closeModal}>
-                    <div className="modal-content" onClick={e => e.stopPropagation()}>
-                        <img src={img1} className="modal-img" alt="Large Pháo 105mm" />
-                        <button className="close-btn" onClick={closeModal}>X</button>
-                    </div>
-                </div>
-            )}
+  return (
+    <div className="detail-container">
+      {isPreviewOpen ? (
+        <div className="preview-modal">
+          <button className="close-button" style={{color: "black"}} onClick={() => setIsPreviewOpen(false)}>
+            X
+          </button>
+          <img
+            src={post?.image || "https://via.placeholder.com/500"}
+            className="preview-image"
+            alt="Full Preview"
+          />
         </div>
-    );
+      ) : (
+        <>
+          <div className="detail-header">
+            <button className="close-button" onClick={() => navigate(-1)}>
+              X
+            </button>
+          </div>
+          {isLoading ? (
+            <p className="loading-text">Đang tải chi tiết bài viết...</p>
+          ) : post ? (
+            <div className="detail-content">
+              <div
+                className="image-section"
+                onClick={() => setIsPreviewOpen(true)}
+                style={{ position: "relative", cursor: "pointer" }}
+              >
+                <img
+                  src={post.image || "https://via.placeholder.com/500"}
+                  className="detail-image"
+                  alt="Post Detail"
+                  style={{ width: "100%", height: "300px", objectFit: "cover" }}
+                />
+                <div className="image-overlay">
+                  <span className="overlay-text">Preview</span>
+                </div>
+              </div>
+              <div className="text-section">
+                <h3 className="detail-title">{post.title}</h3>
+                <p className="detail-description">{post.content}</p>
+              </div>
+            </div>
+          ) : (
+            <p className="error-text">Bài viết không tồn tại!</p>
+          )}
+        </>
+      )}
+    </div>
+  );
 }

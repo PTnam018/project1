@@ -31,7 +31,7 @@ export function getAllPost() {
 }
 
 export function getPostByPostId(postId) {
-    return axios.post(`${API_BASE_URL}/post/getPostByPostId`, null, {
+    return axios.get(`${API_BASE_URL}/post/getPostByPostId`, {
         params: {
             postId: postId
         }
