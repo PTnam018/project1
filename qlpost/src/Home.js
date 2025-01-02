@@ -23,7 +23,7 @@ const Home = () => {
       const response = await getAllPost();
       const allPosts = response.data.data;  // `data` chứa mảng các bài viết
   
-      console.log("khanhpq", allPosts)
+      console.log("nam", allPosts)
       console.log('Type of allPosts:', typeof allPosts);
       console.log('Is allPosts an array?', Array.isArray(allPosts));
       // Kiểm tra nếu `allPosts` là mảng
@@ -60,7 +60,7 @@ const Home = () => {
         resetForm();
         setIsModalOpen(false);
 
-        console.log("Bài viết đã được tạo thành công:");
+        console.log("Bài viết đã được tạo addPost:");
         console.log("Tiêu đề:", title);
         console.log("Nội dung:", content);
         console.log("Ảnh:", imageUri);
@@ -71,11 +71,6 @@ const Home = () => {
   };
 
   const handleEditPost = (id) => {
-
-    console.log("Bài viết đã được tạo thành công:");
-        console.log("Tiêu đề:", title);
-        console.log("Nội dung:", content);
-        console.log("Ảnh:", imageUri);
         
     const postToEdit = posts.find((post) => post.id === id);
     setTitle(postToEdit.title);
@@ -83,11 +78,6 @@ const Home = () => {
     setImageUri(postToEdit.image);
     setEditingId(id);
     setIsModalOpen(true);
-
-    console.log("Bài viết đã được tạo thành công:");
-        console.log("Tiêu đề:", title);
-        console.log("Nội dung:", content);
-        console.log("Ảnh:", imageUri);
   };
 
   const handleSaveEdit = async () => {
@@ -98,7 +88,7 @@ const Home = () => {
         resetForm();
         setIsModalOpen(false);
 
-        console.log("Bài viết đã được tạo thành công:");
+        console.log("Bài viết đã được updatePost:");
         console.log("Tiêu đề:", title);
         console.log("Nội dung:", content);
         console.log("Ảnh:", imageUri);
