@@ -105,8 +105,9 @@ export const updatePost = async (req, res) => {
     const image = req.body.image;
     const postId = req.body.postId;
 
-    console.log(title)
-    console.log(image)
+    console.log("Tiêu đề:", title);
+    console.log("Nội dung:", content);
+    console.log("Ảnh:", image);
 
     const promises = []
 

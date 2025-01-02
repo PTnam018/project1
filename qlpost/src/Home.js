@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import { createPost, getAllPost, getPostByPostId, updatePost, deletePost } from './services/API.js';
+import { createPost, getAllPost, updatePost, deletePost } from './services/API.js';
 
 Modal.setAppElement('#root');
 
@@ -55,10 +55,15 @@ const Home = () => {
   const handleAddPost = async () => {
     try {
       const response = await createPost(title, content, imageUri);
-      if (response.status === 201) {
+      if (response.status === 200 || response.status === 201) {
         fetchPosts();
         resetForm();
         setIsModalOpen(false);
+
+        console.log("Bài viết đã được tạo thành công:");
+        console.log("Tiêu đề:", title);
+        console.log("Nội dung:", content);
+        console.log("Ảnh:", imageUri);
       }
     } catch (error) {
       console.error('Error creating post:', error);
@@ -66,12 +71,23 @@ const Home = () => {
   };
 
   const handleEditPost = (id) => {
+
+    console.log("Bài viết đã được tạo thành công:");
+        console.log("Tiêu đề:", title);
+        console.log("Nội dung:", content);
+        console.log("Ảnh:", imageUri);
+        
     const postToEdit = posts.find((post) => post.id === id);
     setTitle(postToEdit.title);
     setContent(postToEdit.content);
     setImageUri(postToEdit.image);
     setEditingId(id);
     setIsModalOpen(true);
+
+    console.log("Bài viết đã được tạo thành công:");
+        console.log("Tiêu đề:", title);
+        console.log("Nội dung:", content);
+        console.log("Ảnh:", imageUri);
   };
 
   const handleSaveEdit = async () => {
@@ -81,6 +97,11 @@ const Home = () => {
         fetchPosts();
         resetForm();
         setIsModalOpen(false);
+
+        console.log("Bài viết đã được tạo thành công:");
+        console.log("Tiêu đề:", title);
+        console.log("Nội dung:", content);
+        console.log("Ảnh:", imageUri);
       }
     } catch (error) {
       console.error('Error updating post:', error);

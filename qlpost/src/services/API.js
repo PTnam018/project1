@@ -18,14 +18,13 @@ export function login(email, password) {
 }
 
 export function createPost(title, content, image) {
-    return axios.post(`${API_BASE_URL}/post/createPost`, null, {
-        params: {
-            title: title,
-            content: content,
-            image: image,
-        }
+    return axios.post(`${API_BASE_URL}/post/createPost`, {
+        title: title,
+        content: content,
+        image: image,
     });
 }
+
 
 
 export function getAllPost() {
@@ -41,13 +40,11 @@ export function getPostByPostId(postId) {
 }
 
 export function updatePost(title, content, image, postId) {
-    return axios.post(`${API_BASE_URL}/post/updatePost`, null, {
-        params: {
-            title: title,
-            content: content,
-            image: image,
-            postId: postId
-        }
+    return axios.post(`${API_BASE_URL}/post/updatePost`, {
+        title: title,
+        content: content,
+        image: image,
+        postId: postId
     });
 }
 
